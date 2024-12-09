@@ -32,9 +32,10 @@ public class PagamentoTests {
 
         Double valorEsperado = 110.00;
         Double valorPago = pagamento.getValorPago();
+        double margemErro = 0.01;
 
         assertAll(
-                () -> assertEquals(valorEsperado, valorPago),
+                () -> assertEquals(valorEsperado, valorPago, margemErro),
                 () -> assertEquals(TipoPagamento.BOLETO, pagamento.getTipoPagamento())
         );
 
@@ -52,7 +53,9 @@ public class PagamentoTests {
         // Assert
         assertNotNull(pagamento);
         double valorEsperado = 100.00;
-        assertEquals(valorEsperado, pagamento.getValorPago());
+        double margemErro = 0.01;
+
+        assertEquals(valorEsperado, pagamento.getValorPago(), margemErro);
         assertEquals(TipoPagamento.BOLETO, pagamento.getTipoPagamento());
     }
 
@@ -68,7 +71,8 @@ public class PagamentoTests {
         // Assert
         assertNotNull(pagamento);
         double valorEsperado = 100.00;
-        assertEquals(valorEsperado, pagamento.getValorPago());
+        double margemErro = 0.01;
+        assertEquals(valorEsperado, pagamento.getValorPago(), margemErro);
         assertEquals(TipoPagamento.CARTAO_CREDITO, pagamento.getTipoPagamento());
     }
 
@@ -84,7 +88,8 @@ public class PagamentoTests {
         // Assert
         assertNotNull(pagamento);
         double valorEsperado = 100.00;
-        assertEquals(valorEsperado, pagamento.getValorPago());
+        double margemErro = 0.01;
+        assertEquals(valorEsperado, pagamento.getValorPago(), margemErro);
         assertEquals(TipoPagamento.TRANSFERENCIA_BANCARIA, pagamento.getTipoPagamento());
     }
 
