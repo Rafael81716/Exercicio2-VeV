@@ -31,8 +31,8 @@ class ProcessadorContasTests {
 		Conta conta = new Conta("999", new Date(2024, 07, 29), 500.00);
 
 		assertEquals(conta.getCodigo(), "999");
-		assertEquals(conta.getDataPagamento(), new Date(2024, 07, 29));
-		assertEquals(conta.valorPago(), 500.00);
+		assertEquals(conta.getData(), new Date(2024, 07, 29));
+		assertEquals(conta.getValorPago(), 500.00);
 	}
 
 	@BeforeEach
