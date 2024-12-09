@@ -30,6 +30,6 @@ class ProcessadorContasTests {
 	void setUp(){
 		this.processadorContas = new ProcessadorContas();
 		this.contas = new ArrayList<>();
-		this.fatura = new Fatura();
+		this.fatura = new Fatura(new Date(2024, 07, 24), 100.00, "Rafael");
 	}
 }
