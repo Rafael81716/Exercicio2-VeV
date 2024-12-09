@@ -26,6 +26,15 @@ class ProcessadorContasTests {
 		assertEquals(fatura.getNomeCliente(), "Rafael");
 	}
 
+	@Test
+	void shouldInitializeContaCorrectly(){
+		Conta conta = new Conta("999", new Date(2024, 07, 29), 500.00);
+
+		assertEquals(conta.getCodigo(), "999");
+		assertEquals(conta.getDataPagamento(), new Date(2024, 07, 29));
+		assertEquals(conta.valorPago(), 500.00);
+	}
+
 	@BeforeEach
 	void setUp(){
 		this.processadorContas = new ProcessadorContas();
