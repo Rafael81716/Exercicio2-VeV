@@ -1,5 +1,5 @@
-Exercício 2 da Disciplina de Validação e Verificação.
+Exercício 2 da Disciplina de Validação e Verificação. \n
 
-Grupo:
-Rafael de Sousa Cavalcante
+Grupo: \n
+Rafael de Sousa Cavalcante \n
 Ingrid Jackeline
