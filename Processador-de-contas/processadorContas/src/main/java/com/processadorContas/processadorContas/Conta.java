@@ -6,10 +6,12 @@ public class Conta {
     private String codigo;
     private Date data;
     private Double valorPago;
-    public Conta(String codigo, Date data, Double valorPago){
+    private TipoPagamento tipoPagamento;
+    public Conta(String codigo, Date data, Double valorPago, TipoPagamento tipoPagamento){
         this.codigo = codigo;
         this.data = data;
         this.valorPago = valorPago;
+        this.tipoPagamento = tipoPagamento;
     }
 
     public Date getData() {
@@ -22,5 +24,9 @@ public class Conta {
 
     public String getCodigo() {
         return codigo;
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
     }
 }

@@ -99,4 +99,30 @@ class ProcessadorContasTests {
 
 	}
 
+	@Test
+	void ValidateIfFaturaIsPaid() {
+		// Arrange
+		Fatura fatura = new Fatura(new Date(2024, Calendar.DECEMBER, 10), 100.00, "Rafael");
+		Double valorTotalPagar = 150.00;
+
+		// Act
+		processadorContas.validarPagamento(valorTotalPagar, fatura);
+
+		// Assert
+		assertEquals(StatusPagamento.PAGA, fatura.getStatusPagamento());
+	}
+
+	@Test
+	void ValidateIfFaturaIsNotPaid() {
+		// Arrange
+		Fatura fatura = new Fatura(new Date(2024, Calendar.DECEMBER, 10), 100.00, "Usuario 1");
+		Double valorTotalPagar = 50.00;
+
+		// Act
+		processadorContas.validarPagamento(valorTotalPagar, fatura);
+
+		// Assert
+		assertEquals(StatusPagamento.PENDENTE, fatura.getStatusPagamento());
+	}
+
 }
