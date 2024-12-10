@@ -47,7 +47,7 @@ class ProcessadorContasTests {
 	void setUp(){
 		this.processadorContas = new ProcessadorContas();
 		this.contas = new ArrayList<>();
-		this.contas.add(new Conta("001", new Date(2024, Calendar.DECEMBER, 9), 100.00, TipoPagamento.CARTAO_CREDITO));
+		this.contas.add(new Conta("001", new Date(2024, Calendar.DECEMBER, 8), 100.00, TipoPagamento.TRANSFERENCIA_BANCARIA));
 		this.fatura = new Fatura(new Date(2024, Calendar.DECEMBER, 9), 100.00, "Rafael");
 	}
 
@@ -55,10 +55,10 @@ class ProcessadorContasTests {
 	void shouldProcessContasOfAFaturaWithStatusPaga(){
 		// Arrange
 		// Act
-		this.processadorContas.processarContas(fatura, contas, new Date(2024, Calendar.DECEMBER, 9));
+		this.processadorContas.processarContas(fatura, contas, new Date(2024, Calendar.DECEMBER, 8));
 
 		// Assert
-		assertEquals(this.fatura.getStatusPagamento(), StatusPagamento.PAGA);
+		assertEquals(StatusPagamento.PAGA, fatura.getStatusPagamento());
 	}
 	@Test
 	void shouldProcessContasOfAFaturaWithStatusPendente(){
@@ -76,10 +76,10 @@ class ProcessadorContasTests {
 	void shouldProcessContaBefore15DaysWithCreditCard(){
 		// Arrange
 		this.contas = new ArrayList<>();
-		this.contas.add(new Conta("001", new Date(2024, Calendar.NOVEMBER, 1), 100.00, TipoPagamento.CARTAO_CREDITO));
+		this.contas.add(new Conta("001", new Date(2024, Calendar.DECEMBER, 1), 100.00, TipoPagamento.CARTAO_CREDITO));
 
 		// Act
-		this.processadorContas.processarContas(fatura, contas, new Date(2024, Calendar.DECEMBER, 9));
+		this.processadorContas.processarContas(fatura, contas, new Date(2024, Calendar.NOVEMBER, 9));
 
 		// Assert
 		assertEquals(StatusPagamento.PAGA, fatura.getStatusPagamento());

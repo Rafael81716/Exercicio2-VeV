@@ -9,14 +9,14 @@ public class ProcessadorContas {
     }
 
     public void processarContas(Fatura fatura, List<Conta> contas, Date dataProcesso){
-        if(fatura.getValorTotal() > 0){
+        if(fatura.getValorTotal() < 0){
             return;
         }
 
         Double valorTotalPagar = 0.0;
 
         for(Conta conta : contas){
-            Pagamento pagamento = this.realizarPagamento(conta, fatura.getData());
+            Pagamento pagamento = this.realizarPagamento(conta, fatura.getData(), dataProcesso);
 
             if(pagamento != null){
                 if(this.pagamentoValido(pagamento, fatura.getData())){
@@ -24,7 +24,6 @@ public class ProcessadorContas {
                 }
             }
         }
-
         validarPagamento(valorTotalPagar, fatura);
     }
 
@@ -47,7 +46,7 @@ public class ProcessadorContas {
         }
     }
 
-    public Pagamento realizarPagamento(Conta conta, Date dataPagamento){
+    public Pagamento realizarPagamento(Conta conta, Date dataPagamento, Date dataProcesso){
         Double valorPago = conta.getValorPago();
 
         if(conta.getTipoPagamento().equals(TipoPagamento.BOLETO)){
@@ -56,6 +55,6 @@ public class ProcessadorContas {
             }
         }
 
-        return new Pagamento(valorPago, new Date(), conta.getTipoPagamento());
+        return new Pagamento(valorPago, dataProcesso, conta.getTipoPagamento());
     }
 }

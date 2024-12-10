@@ -25,7 +25,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", new Date(2024, Calendar.DECEMBER, 24), 100.00, TipoPagamento.BOLETO);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, new Date(2024, Calendar.DECEMBER, 25));
+        Pagamento pagamento = processadorContas.realizarPagamento(conta, new Date(2024, Calendar.DECEMBER, 25), new Date(2024, Calendar.DECEMBER, 24));
 
         // Assert
         assertNotNull(pagamento);
@@ -48,7 +48,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", dataVencimento, 100.00, TipoPagamento.BOLETO);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento);
+        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento, dataVencimento);
 
         // Assert
         assertNotNull(pagamento);
@@ -66,7 +66,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", dataVencimento, 100.00, TipoPagamento.CARTAO_CREDITO);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento);
+        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento, dataVencimento);
 
         // Assert
         assertNotNull(pagamento);
@@ -83,7 +83,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", dataVencimento, 100.00, TipoPagamento.TRANSFERENCIA_BANCARIA);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento);
+        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento, dataVencimento);
 
         // Assert
         assertNotNull(pagamento);
