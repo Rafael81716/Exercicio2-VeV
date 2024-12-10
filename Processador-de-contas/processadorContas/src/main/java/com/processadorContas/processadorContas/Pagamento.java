@@ -2,31 +2,25 @@ package com.processadorContas.processadorContas;
 
 import java.util.Date;
 
-public class Conta {
-    private String codigo;
-    private Date data;
+public class Pagamento {
     private Double valorPago;
+    private Date dataPagamento;
     private TipoPagamento tipoPagamento;
-    public Conta(String codigo, Date data, Double valorPago, TipoPagamento tipoPagamento){
-        this.codigo = codigo;
-        this.data = data;
+    public Pagamento(Double valorPago, Date dataPagamento, TipoPagamento tipoPagamento){
         this.valorPago = valorPago;
+        this.dataPagamento = dataPagamento;
         this.tipoPagamento = tipoPagamento;
-    }
-
-    public Date getData() {
-        return data;
     }
 
     public Double getValorPago() {
         return valorPago;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
+    }
+
+    public Date getDataPagamento() {
+        return dataPagamento;
     }
 }
