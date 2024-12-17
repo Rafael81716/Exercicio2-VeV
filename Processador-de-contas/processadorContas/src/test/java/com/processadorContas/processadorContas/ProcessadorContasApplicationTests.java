@@ -86,6 +86,36 @@ class ProcessadorContasTests {
 
 	}
 	@Test
+	void shouldNotProcessContaIfValueToPayIsMinus1WithBoleto(){
+		// Arrange
+
+		this.contas = new ArrayList<>();
+		this.contas.add(new Conta("001", new Date(2024, Calendar.DECEMBER, 1), -1.00, TipoPagamento.BOLETO));
+		this.contas.add(new Conta("002", new Date(2024, Calendar.DECEMBER, 1), 100.00, TipoPagamento.BOLETO));
+
+		// Act
+		this.processadorContas.processarContas(fatura, contas, new Date(2024, Calendar.NOVEMBER, 9));
+
+		// Assert
+		assertEquals(fatura.getStatusPagamento(), StatusPagamento.PAGA);
+
+	}
+	@Test
+	void shouldNotProcessContaIfValueToPayIsOver5kWithBoleto(){
+		// Arrange
+		this.fatura = new Fatura(new Date(2024, Calendar.DECEMBER, 9), 200.00, "Rafael");
+
+		this.contas = new ArrayList<>();
+		this.contas.add(new Conta("001", new Date(2024, Calendar.DECEMBER, 1), 100.00, TipoPagamento.BOLETO));
+		this.contas.add(new Conta("002", new Date(2024, Calendar.DECEMBER, 1), 6000.00, TipoPagamento.BOLETO));
+
+		// Act
+		this.processadorContas.processarContas(fatura, contas, new Date(2024, Calendar.NOVEMBER, 9));
+
+		// Assert
+		assertEquals(fatura.getStatusPagamento(), StatusPagamento.PENDENTE);
+	}
+	@Test
 	void shouldReturnPendenteIfContaIsPaidNotBefore15DaysWithCreditCard(){
 		// Arrange
 		this.contas = new ArrayList<>();

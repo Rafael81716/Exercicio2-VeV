@@ -25,7 +25,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", new Date(2024, Calendar.DECEMBER, 24), 100.00, TipoPagamento.BOLETO);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, new Date(2024, Calendar.DECEMBER, 25), new Date(2024, Calendar.DECEMBER, 24));
+        Pagamento pagamento = processadorContas.criarPagamento(conta, new Date(2024, Calendar.DECEMBER, 25), new Date(2024, Calendar.DECEMBER, 24));
 
         // Assert
         assertNotNull(pagamento);
@@ -48,7 +48,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", dataVencimento, 100.00, TipoPagamento.BOLETO);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento, dataVencimento);
+        Pagamento pagamento = processadorContas.criarPagamento(conta, dataVencimento, dataVencimento);
 
         // Assert
         assertNotNull(pagamento);
@@ -66,7 +66,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", dataVencimento, 100.00, TipoPagamento.CARTAO_CREDITO);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento, dataVencimento);
+        Pagamento pagamento = processadorContas.criarPagamento(conta, dataVencimento, dataVencimento);
 
         // Assert
         assertNotNull(pagamento);
@@ -83,7 +83,7 @@ public class PagamentoTests {
         Conta conta = new Conta("001", dataVencimento, 100.00, TipoPagamento.TRANSFERENCIA_BANCARIA);
 
         // Act
-        Pagamento pagamento = processadorContas.realizarPagamento(conta, dataVencimento, dataVencimento);
+        Pagamento pagamento = processadorContas.criarPagamento(conta, dataVencimento, dataVencimento);
 
         // Assert
         assertNotNull(pagamento);
@@ -102,7 +102,63 @@ public class PagamentoTests {
         Date vencimentoFatura =  new Date(2024, Calendar.DECEMBER, 24);
         Pagamento pagamento = new Pagamento(100.0, dataPagamento, TipoPagamento.CARTAO_CREDITO);
 
-        boolean resultado = processadorContas.pagamentoValido(pagamento, vencimentoFatura);
+        boolean resultado = processadorContas.checaPagamentoValido(pagamento, vencimentoFatura);
+
+        // Assert
+        assertTrue(resultado);
+    }
+    @Test
+    public void shouldReturnFalseIfBoletoIsOver5k() {
+        // Arrange
+
+        // Act
+        Date dataPagamento =  new Date(2024, Calendar.DECEMBER, 9); // 15 dias antes
+        Date vencimentoFatura =  new Date(2024, Calendar.DECEMBER, 24);
+        Pagamento pagamento = new Pagamento(5001.0, dataPagamento, TipoPagamento.BOLETO);
+
+        boolean resultado = processadorContas.checaPagamentoValido(pagamento, vencimentoFatura);
+
+        // Assert
+        assertFalse(resultado);
+    }
+    @Test
+    public void shouldReturnFalseIfBoletoIsZero() {
+        // Arrange
+
+        // Act
+        Date dataPagamento =  new Date(2024, Calendar.DECEMBER, 9); // 15 dias antes
+        Date vencimentoFatura =  new Date(2024, Calendar.DECEMBER, 24);
+        Pagamento pagamento = new Pagamento(0.0, dataPagamento, TipoPagamento.BOLETO);
+
+        boolean resultado = processadorContas.checaPagamentoValido(pagamento, vencimentoFatura);
+
+        // Assert
+        assertFalse(resultado);
+    }
+    @Test
+    public void shouldReturnTrueIfBoletoIsNotZero() {
+        // Arrange
+
+        // Act
+        Date dataPagamento =  new Date(2024, Calendar.DECEMBER, 9); // 15 dias antes
+        Date vencimentoFatura =  new Date(2024, Calendar.DECEMBER, 24);
+        Pagamento pagamento = new Pagamento(0.01, dataPagamento, TipoPagamento.BOLETO);
+
+        boolean resultado = processadorContas.checaPagamentoValido(pagamento, vencimentoFatura);
+
+        // Assert
+        assertTrue(resultado);
+    }
+    @Test
+    public void shouldReturnTrueIfBoletoIs5k() {
+        // Arrange
+
+        // Act
+        Date dataPagamento =  new Date(2024, Calendar.DECEMBER, 9); // 15 dias antes
+        Date vencimentoFatura =  new Date(2024, Calendar.DECEMBER, 24);
+        Pagamento pagamento = new Pagamento(5000.0, dataPagamento, TipoPagamento.BOLETO);
+
+        boolean resultado = processadorContas.checaPagamentoValido(pagamento, vencimentoFatura);
 
         // Assert
         assertTrue(resultado);
@@ -118,7 +174,7 @@ public class PagamentoTests {
         Date vencimentoFatura = new Date(2024, Calendar.DECEMBER, 24);
         Pagamento pagamento = new Pagamento(100.0, dataPagamento, TipoPagamento.CARTAO_CREDITO);
 
-        boolean resultado = processador.pagamentoValido(pagamento, vencimentoFatura);
+        boolean resultado = processador.checaPagamentoValido(pagamento, vencimentoFatura);
 
         // Assert
         assertFalse(resultado);
@@ -134,7 +190,7 @@ public class PagamentoTests {
         Pagamento pagamento = new Pagamento(100.0, dataPagamento, TipoPagamento.BOLETO);
 
         // Act
-        boolean resultado = processador.pagamentoValido(pagamento, vencimentoFatura);
+        boolean resultado = processador.checaPagamentoValido(pagamento, vencimentoFatura);
 
         // Assert
         assertTrue(resultado);
@@ -150,7 +206,7 @@ public class PagamentoTests {
         Pagamento pagamento = new Pagamento(100.0, dataPagamento, TipoPagamento.BOLETO);
 
         // Act
-        boolean resultado = processador.pagamentoValido(pagamento, vencimentoFatura);
+        boolean resultado = processador.checaPagamentoValido(pagamento, vencimentoFatura);
 
         // Assert
         assertFalse(resultado);
