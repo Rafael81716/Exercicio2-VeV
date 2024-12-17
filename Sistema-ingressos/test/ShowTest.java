@@ -9,26 +9,17 @@ import java.util.Map;
 
 
 class ShowTest {
-
+	
 	private Set<Ingresso> ingressos;
 	private Map<Integer, Lote> lotesIngressos;
-	
-	@BeforeEach
-	void initIngressos() {
-		this.ingressos = new HashSet<>();
-		
-		this.ingressos.add(new Ingresso(1, TipoIngresso.NORMAL, false));
-		this.ingressos.add(new Ingresso(2, TipoIngresso.MEIA_ENTRADA, true));
-		this.ingressos.add(new Ingresso(3, TipoIngresso.VIP, false));
-	}
 	
 	@BeforeEach
 	void initLotesIngressos() {
 		this.lotesIngressos = new HashMap<>();
 		
-		this.lotesIngressos.put(1, new Lote(1, this.ingressos, 0.25));
-		this.lotesIngressos.put(2, new Lote(2, this.ingressos, 0));
-		this.lotesIngressos.put(3, new Lote(3, this.ingressos, 0.10));
+		this.lotesIngressos.put(1, new Lote(1, 0.25));
+		this.lotesIngressos.put(2, new Lote(2, 0));
+		this.lotesIngressos.put(3, new Lote(3, 0.10));
 	}
 
 	@Test
@@ -46,6 +37,33 @@ class ShowTest {
 		assertEquals(show.getTotalDespesasInfraestrutura(), totalDespesasInfraestrutura);
 		assertEquals(show.getLotesIngressos(), this.lotesIngressos);
 		assertTrue(show.getDataEspecial());
+	}
+	
+	@Test
+	void testDistribuiIngressos() {
+		Show show = new Show(LocalDate.of(2024, 12, 14), "Alceu Valença", 900000, 40000, lotesIngressos, true);
+		int numeroIngressos = 100;
+		int totalIngressosVip = 0;
+		int totalIngressosMeiaEntrada = 0;
+		int totalIngressosNormal = 0;
+		
+		show.distribuiIngressos(numeroIngressos);
+		
+		for (Lote lote : this.lotesIngressos.values()) {
+			for (Ingresso ingresso : lote.getIngressos()) {
+				if (ingresso.getTipo() == TipoIngresso.NORMAL) {
+					totalIngressosNormal += 1;
+				} else if (ingresso.getTipo() == TipoIngresso.VIP) {
+					totalIngressosVip += 1;
+				} else {
+					totalIngressosMeiaEntrada += 1;
+				}
+			}
+		}
+		
+		assertTrue(totalIngressosVip >= 20 && totalIngressosVip <= 30);
+        assertTrue(totalIngressosMeiaEntrada == 10);
+        assertTrue(totalIngressosNormal >= 60 && totalIngressosNormal <= 70);
 	}
 
 }
