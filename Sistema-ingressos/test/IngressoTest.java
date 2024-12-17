@@ -57,5 +57,29 @@ class IngressoTest {
 		
 		assertFalse(ingresso.getStatus());
 	}
+	
+	@Test
+	void testCalculaCustoIngressoNormal() {
+		Ingresso ingresso = new Ingresso(6, TipoIngresso.NORMAL, false);
+		double custoIngressoNormal = 10.50;
+		
+		assertEquals(ingresso.calculaCusto(custoIngressoNormal), custoIngressoNormal);
+	}
+	
+	@Test
+	void testCalculaCustoIngressoMeiaEntrada() {
+		Ingresso ingresso = new Ingresso(7, TipoIngresso.MEIA_ENTRADA, false);
+		double custoIngressoNormal = 45.50;
+		
+		assertEquals(ingresso.calculaCusto(custoIngressoNormal), 22.75);
+	}
+	
+	@Test
+	void testCalculaCustoIngressoVip() {
+		Ingresso ingresso = new Ingresso(8, TipoIngresso.VIP, true);
+		double custoIngressoNormal = 30.90;
+		
+		assertEquals(ingresso.calculaCusto(custoIngressoNormal), 61.80);
+	}
 
 }
