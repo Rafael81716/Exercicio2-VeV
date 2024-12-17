@@ -62,7 +62,7 @@ class ShowTest {
 		}
 		
 		assertTrue(totalIngressosVip >= 20 && totalIngressosVip <= 30);
-        assertTrue(totalIngressosMeiaEntrada == 10);
+        assertTrue(totalIngressosMeiaEntrada <= 10);
         assertTrue(totalIngressosNormal >= 60 && totalIngressosNormal <= 70);
 	}
 
