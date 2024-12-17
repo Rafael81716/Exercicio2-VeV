@@ -22,7 +22,7 @@ class RelatorioShowTest {
         lotes.put(2, lote2);
 
         Show show = new Show(LocalDate.now(), "Artista Teste", 5000, 3000, lotes, true);
-        String relatorio = RelatorioShow.geraRelatorio(show, 100.0);
+        String relatorio = (new RelatorioShow()).geraRelatorio(show, 100);
 
         assertTrue(relatorio.contains("Artista: Artista Teste"));
         assertTrue(relatorio.contains("Normais: 1"));
