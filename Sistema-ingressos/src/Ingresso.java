@@ -28,4 +28,14 @@ public class Ingresso {
 		}
 	}
 	
+	public double calculaCusto(double custoIngressoNormal) {
+		if (tipo == TipoIngresso.NORMAL) {
+			return custoIngressoNormal;
+		} else if (tipo == TipoIngresso.MEIA_ENTRADA) {
+			return custoIngressoNormal / 2;
+		} else {
+			return custoIngressoNormal * 2;
+		}
+	}
+	
 }
