@@ -22,4 +22,10 @@ public class Ingresso {
 		return this.statusVendido;
 	}
 	
+	public void setStatus(boolean novoStatus) {
+		if (novoStatus != this.statusVendido) {
+			this.statusVendido = novoStatus;
+		}
+	}
+	
 }
