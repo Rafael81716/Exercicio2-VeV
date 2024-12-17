@@ -1,4 +1,5 @@
 import java.util.Set;
+import java.util.HashSet;
 
 
 public class Lote {
@@ -7,9 +8,9 @@ public class Lote {
 	private Set<Ingresso> ingressos;
 	private double desconto;
 	
-	public Lote(int id, Set<Ingresso> ingressos, double desconto) {
+	public Lote(int id, double desconto) {
 		this.id = id;
-		this.ingressos = ingressos;
+		this.ingressos = new HashSet<>();
 		this.adicionaDesconto(desconto);
 	}
 	
@@ -23,6 +24,10 @@ public class Lote {
 	
 	public double getDesconto() {
 		return this.desconto;
+	}
+	
+	public void adicionaIngresso(Ingresso ingresso) {
+		this.ingressos.add(ingresso);
 	}
 	
 	private void adicionaDesconto(double desconto) {
