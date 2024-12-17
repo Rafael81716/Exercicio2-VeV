@@ -40,5 +40,39 @@ private Set<Ingresso> ingressos;
 		assertEquals(lote.getIngressos(), this.ingressos);
 		assertEquals(lote.getDesconto(), desconto);
 	}
+	
+	@Test
+	void testCriaLoteSemDesconto() {
+		int id = 3;
+		double desconto = 0;
+		Lote lote = new Lote(id, this.ingressos, desconto);
+		
+		assertEquals(lote.getDesconto(), desconto);
+	}
+	
+	@Test
+	void testCriaLoteComDescontoMáximo() {
+		int id = 4;
+		double desconto = 0.25;
+		Lote lote = new Lote(id, this.ingressos, desconto);
+		
+		assertEquals(lote.getDesconto(), desconto);
+	}
+	
+	@Test
+	void testCriaLoteComDescontoNegativo() {
+		int id = 5;
+		double desconto = -0.1;
+		
+		assertThrows(IllegalArgumentException.class, () -> new Lote(id, this.ingressos, desconto));
+	}
+	
+	@Test
+	void testCriaLoteComDescontoAcimaMaximo() {
+		int id = 6;
+		double desconto = 0.26;
+		
+		assertThrows(IllegalArgumentException.class, () -> new Lote(id, this.ingressos, desconto));
+	}
 
 }
