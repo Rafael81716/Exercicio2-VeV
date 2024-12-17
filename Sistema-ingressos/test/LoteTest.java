@@ -1,32 +1,30 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Set;
-import java.util.HashSet;
 
 
 class LoteTest {
 
-private Set<Ingresso> ingressos;
+private Ingresso ingresso1;
+private Ingresso ingresso2;
+private Ingresso ingresso3;
+
 	
 	@BeforeEach
-	void initIngressos() {
-		this.ingressos = new HashSet<>();
-		
-		this.ingressos.add(new Ingresso(1, TipoIngresso.NORMAL, false));
-		this.ingressos.add(new Ingresso(2, TipoIngresso.MEIA_ENTRADA, true));
-		this.ingressos.add(new Ingresso(3, TipoIngresso.VIP, false));
+	void initIngressos() {		
+		this.ingresso1 = new Ingresso(1, TipoIngresso.NORMAL, false);
+		this.ingresso2 = new Ingresso(2, TipoIngresso.MEIA_ENTRADA, true);
+		this.ingresso3 = new Ingresso(3, TipoIngresso.VIP, false);
 	}
 
 	@Test
 	void testCriaLoteSemIngressos() {
 		int id = 1;
-		Set<Ingresso> ingressosVazios = new HashSet<>();
 		double desconto = 0.05;
-		Lote lote = new Lote(id, ingressosVazios, desconto);
+		Lote lote = new Lote(id, desconto);
 		
 		assertEquals(lote.getId(), id);
-		assertEquals(lote.getIngressos(), ingressosVazios);
+		assertEquals(lote.getIngressos().size(), 0);
 		assertEquals(lote.getDesconto(), desconto);
 	}
 	
@@ -34,10 +32,14 @@ private Set<Ingresso> ingressos;
 	void testCriaLoteComIngressos() {
 		int id = 2;
 		double desconto = 0.05;
-		Lote lote = new Lote(id, this.ingressos, desconto);
+		Lote lote = new Lote(id, desconto);
+		
+		lote.adicionaIngresso(ingresso1);
+		lote.adicionaIngresso(ingresso2);
+		lote.adicionaIngresso(ingresso3);
 		
 		assertEquals(lote.getId(), id);
-		assertEquals(lote.getIngressos(), this.ingressos);
+		assertEquals(lote.getIngressos().size(), 3);
 		assertEquals(lote.getDesconto(), desconto);
 	}
 	
@@ -45,7 +47,7 @@ private Set<Ingresso> ingressos;
 	void testCriaLoteSemDesconto() {
 		int id = 3;
 		double desconto = 0;
-		Lote lote = new Lote(id, this.ingressos, desconto);
+		Lote lote = new Lote(id, desconto);
 		
 		assertEquals(lote.getDesconto(), desconto);
 	}
@@ -54,7 +56,7 @@ private Set<Ingresso> ingressos;
 	void testCriaLoteComDescontoMáximo() {
 		int id = 4;
 		double desconto = 0.25;
-		Lote lote = new Lote(id, this.ingressos, desconto);
+		Lote lote = new Lote(id, desconto);
 		
 		assertEquals(lote.getDesconto(), desconto);
 	}
@@ -64,7 +66,7 @@ private Set<Ingresso> ingressos;
 		int id = 5;
 		double desconto = -0.1;
 		
-		assertThrows(IllegalArgumentException.class, () -> new Lote(id, this.ingressos, desconto));
+		assertThrows(IllegalArgumentException.class, () -> new Lote(id, desconto));
 	}
 	
 	@Test
@@ -72,7 +74,7 @@ private Set<Ingresso> ingressos;
 		int id = 6;
 		double desconto = 0.26;
 		
-		assertThrows(IllegalArgumentException.class, () -> new Lote(id, this.ingressos, desconto));
+		assertThrows(IllegalArgumentException.class, () -> new Lote(id, desconto));
 	}
 
 }
