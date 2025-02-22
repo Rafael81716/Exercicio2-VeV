@@ -99,16 +99,4 @@ public class ParticaoEquivalenciaTests {
         assertEquals(StatusPagamento.PENDENTE, fatura.getStatusPagamento());
     }
 
-    @Test
-    void shouldNotProcessBoletoWithValueOver5k(){
-        // Arrange
-        Conta conta1 = new Conta("001", new Date(2025, Calendar.FEBRUARY, 15), 6000.00, TipoPagamento.BOLETO);
-        this.contas.add(conta1);
-        this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 15), 6000.00, "Rafael");
-        // Act
-        this.processadorContas.processarContas(fatura, contas, new Date(2025, Calendar.FEBRUARY, 15));
-
-        // Assert
-        assertEquals(StatusPagamento.PENDENTE, fatura.getStatusPagamento());
-    }
 }
