@@ -53,7 +53,7 @@ private Ingresso ingresso3;
 	}
 	
 	@Test
-	void testCriaLoteComDescontoMáximo() {
+	void testCriaLoteComDescontoMaximo() {
 		int id = 4;
 		double desconto = 0.25;
 		Lote lote = new Lote(id, desconto);

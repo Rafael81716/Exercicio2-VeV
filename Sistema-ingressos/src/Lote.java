@@ -34,7 +34,7 @@ public class Lote {
 		if (desconto >= 0 && desconto <= 0.25) {
 			this.desconto = desconto;
 		} else {
-			throw new IllegalArgumentException("Valor de desconto inválido.");
+			throw new IllegalArgumentException("Valor de desconto invalido.");
 		}
 	}
 	
