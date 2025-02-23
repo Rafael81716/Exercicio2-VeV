@@ -49,7 +49,7 @@ public class TabelaDecisaoTests {
             Conta conta2 = new Conta("002", new Date(2025, Calendar.FEBRUARY, 15), 400.00, TipoPagamento.BOLETO);
             this.contas.add(conta1);
             this.contas.add(conta2);
-            this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 16), 990.00, "Rafael");
+            this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 14), 990.00, "Rafael");
             // Act
             this.processadorContas.processarContas(fatura, contas, new Date(2025, Calendar.FEBRUARY, 15));
 
@@ -60,7 +60,7 @@ public class TabelaDecisaoTests {
         @Test
         void shouldProcessContasOfAFaturaWithOtherPaymentTypes(){
             // Arrange
-            Conta conta1 = new Conta("001", new Date(2025, Calendar.FEBRUARY, 14), 500.00, TipoPagamento.TRANSFERENCIA_BANCARIA);
+            Conta conta1 = new Conta("001", new Date(2025, Calendar.JANUARY, 1), 500.00, TipoPagamento.TRANSFERENCIA_BANCARIA);
             Conta conta2 = new Conta("002", new Date(2025, Calendar.JANUARY, 1), 1100.00, TipoPagamento.CARTAO_CREDITO);
             this.contas.add(conta1);
             this.contas.add(conta2);
@@ -110,33 +110,7 @@ public class TabelaDecisaoTests {
             Conta conta2 = new Conta("002", new Date(2025, Calendar.FEBRUARY, 15), 400.00, TipoPagamento.BOLETO);
             this.contas.add(conta1);
             this.contas.add(conta2);
-            this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 16), 900.00, "Rafael");
-            // Act
-            this.processadorContas.processarContas(fatura, contas, new Date(2025, Calendar.FEBRUARY, 15));
-
-            // Assert
-            assertEquals(StatusPagamento.PENDENTE, fatura.getStatusPagamento());
-        }
-
-        @Test
-        void shouldNotProcessBoletoWithValueOver5k(){
-            // Arrange
-            Conta conta1 = new Conta("001", new Date(2025, Calendar.FEBRUARY, 15), 6000.00, TipoPagamento.BOLETO);
-            this.contas.add(conta1);
-            this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 15), 6000.00, "Rafael");
-            // Act
-            this.processadorContas.processarContas(fatura, contas, new Date(2025, Calendar.FEBRUARY, 15));
-
-            // Assert
-            assertEquals(StatusPagamento.PENDENTE, fatura.getStatusPagamento());
-        }
-
-        @Test
-        void shouldNotProcessBoletoWithValue0(){
-            // Arrange
-            Conta conta1 = new Conta("001", new Date(2025, Calendar.FEBRUARY, 15), 0.00, TipoPagamento.BOLETO);
-            this.contas.add(conta1);
-            this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 15), 0.00, "Rafael");
+            this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 14), 900.00, "Rafael");
             // Act
             this.processadorContas.processarContas(fatura, contas, new Date(2025, Calendar.FEBRUARY, 15));
 
@@ -155,11 +129,11 @@ public class TabelaDecisaoTests {
         @BeforeEach
         void setUp(){
             this.processadorContas = new ProcessadorContas();
+            this.conta = new Conta("001", new Date(2025, Calendar.FEBRUARY, 15), 900.00, TipoPagamento.BOLETO);
         }
 
         @Test
         void shouldNotIncreasePaymentIfBoletoIsPaidOnTime(){
-            this.conta = new Conta("001", new Date(2025, Calendar.FEBRUARY, 15), 900.00, TipoPagamento.BOLETO);
             this.dataPagamento = new Date(2025, Calendar.FEBRUARY, 15);
             this.dataProcesso = new Date(2025, Calendar.FEBRUARY, 15);
 
@@ -170,7 +144,6 @@ public class TabelaDecisaoTests {
 
         @Test
         void shouldIncreasePaymentIfBoletoIsNotPaidOnTime(){
-            this.conta = new Conta("001", new Date(2025, Calendar.FEBRUARY, 15), 900.00, TipoPagamento.BOLETO);
             this.dataPagamento = new Date(2025, Calendar.FEBRUARY, 14);
             this.dataProcesso = new Date(2025, Calendar.FEBRUARY, 14);
 

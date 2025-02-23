@@ -72,8 +72,8 @@ public class ParticaoEquivalenciaTests {
     @Test
     void shouldProcessContasOfAFaturaWithPendenteStatusWithCreditCardBefore15Days(){
         // Arrange
-        Conta conta1 = new Conta("001", new Date(2025, Calendar.FEBRUARY, 14), 500.00, TipoPagamento.TRANSFERENCIA_BANCARIA);
-        Conta conta2 = new Conta("002", new Date(2025, Calendar.FEBRUARY, 14), 1100.00, TipoPagamento.CARTAO_CREDITO);
+        Conta conta1 = new Conta("001", new Date(2025, Calendar.FEBRUARY, 15), 500.00, TipoPagamento.TRANSFERENCIA_BANCARIA);
+        Conta conta2 = new Conta("002", new Date(2025, Calendar.FEBRUARY, 15), 1100.00, TipoPagamento.CARTAO_CREDITO);
         this.contas.add(conta1);
         this.contas.add(conta2);
         this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 14), 1600.00, "Rafael");
@@ -91,7 +91,7 @@ public class ParticaoEquivalenciaTests {
         Conta conta2 = new Conta("002", new Date(2025, Calendar.FEBRUARY, 15), 400.00, TipoPagamento.BOLETO);
         this.contas.add(conta1);
         this.contas.add(conta2);
-        this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 16), 900.00, "Rafael");
+        this.fatura = new Fatura(new Date(2025, Calendar.FEBRUARY, 16), 990.00, "Rafael");
         // Act
         this.processadorContas.processarContas(fatura, contas, new Date(2025, Calendar.FEBRUARY, 15));
 

@@ -13,16 +13,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AnaliseDeValoresLimitesTests {
     private ProcessadorContas processadorContas;
+    private Date data;
 
     @BeforeEach
     void setUp(){
         this.processadorContas = new ProcessadorContas();
+        this.data = new Date(2025, Calendar.FEBRUARY, 15);
     }
 
     @Test
     void shouldReturnFalseIfValueOfBoletoIsZero(){
-        Pagamento pagamento = new Pagamento(0.00, new Date(2025, Calendar.FEBRUARY, 15), TipoPagamento.BOLETO);
-        Date dataFatura = new Date(2025, Calendar.FEBRUARY, 15);
+        Pagamento pagamento = new Pagamento(0.00, this.data, TipoPagamento.BOLETO);
+        Date dataFatura = this.data;
 
         Boolean output = this.processadorContas.checaPagamentoValido(pagamento, dataFatura);
 
@@ -31,8 +33,8 @@ public class AnaliseDeValoresLimitesTests {
 
     @Test
     void shouldReturnTrueIfValueOfBoletoIsEqualToOneCent(){
-        Pagamento pagamento = new Pagamento(0.01, new Date(2025, Calendar.FEBRUARY, 15), TipoPagamento.BOLETO);
-        Date dataFatura = new Date(2025, Calendar.FEBRUARY, 15);
+        Pagamento pagamento = new Pagamento(0.01, this.data, TipoPagamento.BOLETO);
+        Date dataFatura = this.data;
 
         Boolean output = this.processadorContas.checaPagamentoValido(pagamento, dataFatura);
 
@@ -41,8 +43,8 @@ public class AnaliseDeValoresLimitesTests {
 
     @Test
     void shouldReturnTrueIfValueOfBoletoIsEqualToTwoThousand(){
-        Pagamento pagamento = new Pagamento(2000.00, new Date(2025, Calendar.FEBRUARY, 15), TipoPagamento.BOLETO);
-        Date dataFatura = new Date(2025, Calendar.FEBRUARY, 15);
+        Pagamento pagamento = new Pagamento(2000.00, this.data, TipoPagamento.BOLETO);
+        Date dataFatura = this.data;
 
         Boolean output = this.processadorContas.checaPagamentoValido(pagamento, dataFatura);
 
@@ -51,8 +53,8 @@ public class AnaliseDeValoresLimitesTests {
 
     @Test
     void shouldReturnTrueIfValueOfBoletoIsEqualToFiveThousand(){
-        Pagamento pagamento = new Pagamento(5000.00, new Date(2025, Calendar.FEBRUARY, 15), TipoPagamento.BOLETO);
-        Date dataFatura = new Date(2025, Calendar.FEBRUARY, 15);
+        Pagamento pagamento = new Pagamento(5000.00, this.data, TipoPagamento.BOLETO);
+        Date dataFatura = this.data;
 
         Boolean output = this.processadorContas.checaPagamentoValido(pagamento, dataFatura);
 
@@ -61,8 +63,8 @@ public class AnaliseDeValoresLimitesTests {
 
     @Test
     void shouldReturnFalseIfValueOfBoletoIsHigherThan5K(){
-        Pagamento pagamento = new Pagamento(5000.01, new Date(2025, Calendar.FEBRUARY, 15), TipoPagamento.BOLETO);
-        Date dataFatura = new Date(2025, Calendar.FEBRUARY, 15);
+        Pagamento pagamento = new Pagamento(5000.01, this.data, TipoPagamento.BOLETO);
+        Date dataFatura = this.data;
 
         Boolean output = this.processadorContas.checaPagamentoValido(pagamento, dataFatura);
 
