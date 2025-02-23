@@ -45,7 +45,7 @@ public class Show {
 		return this.dataEspecial;
 	}
 	
-	 public void distribuiIngressos(int totalIngressos) {
+	public void distribuiIngressos(int totalIngressos) {
         Random random = new Random();
         int totalIngressosVIP = random.nextInt((int)(totalIngressos * 0.30) - (int)(totalIngressos * 0.20) + 1) + (int)(totalIngressos * 0.20);
         int totalIngressosMeiaEntrada = (int) (totalIngressos * 0.10);

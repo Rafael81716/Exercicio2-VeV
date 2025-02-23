@@ -10,7 +10,6 @@ import java.util.Map;
 
 class ShowTest {
 	
-	private Set<Ingresso> ingressos;
 	private Map<Integer, Lote> lotesIngressos;
 	
 	@BeforeEach
@@ -41,7 +40,7 @@ class ShowTest {
 	
 	@Test
 	void testDistribuiIngressos() {
-		Show show = new Show(LocalDate.of(2024, 12, 14), "Alceu Valença", 900000, 40000, lotesIngressos, true);
+		Show show = new Show(LocalDate.of(2024, 12, 14), "Alceu Valenï¿½a", 900000, 40000, lotesIngressos, true);
 		int numeroIngressos = 100;
 		int totalIngressosVip = 0;
 		int totalIngressosMeiaEntrada = 0;

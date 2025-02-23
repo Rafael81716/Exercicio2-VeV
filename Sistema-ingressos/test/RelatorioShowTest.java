@@ -28,7 +28,7 @@ class RelatorioShowTest {
         assertTrue(relatorio.contains("Normais: 1"));
         assertTrue(relatorio.contains("Meia-Entrada: 1"));
         assertTrue(relatorio.contains("VIP: 1"));
-        assertTrue(relatorio.contains("Status Financeiro: PREJUÍZO"));
+        assertTrue(relatorio.contains("Status Financeiro: PREJUIZO"));
     }
 
 }

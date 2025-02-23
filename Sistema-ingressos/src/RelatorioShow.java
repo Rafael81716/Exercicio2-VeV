@@ -1,6 +1,3 @@
-import java.util.Map;
-
-
 public class RelatorioShow {
 
     public String geraRelatorio(Show show, double custoIngressoNormal) {
@@ -39,15 +36,15 @@ public class RelatorioShow {
         if (receitaLiquida > 0) {
             statusFinanceiro = "LUCRO";
         } else if (receitaLiquida == 0) {
-            statusFinanceiro = "ESTÁVEL";
+            statusFinanceiro = "ESTAVEL";
         } else {
-            statusFinanceiro = "PREJUÍZO";
+            statusFinanceiro = "PREJUIZO";
         }
 
-        return "Relatório do Show:\n" +
+        return "Relatorio do Show:\n" +
                 "Artista: " + show.getArtista() + "\n" +
                 "Ingressos Vendidos: Normais: " + ingressosNormais + ", Meia-Entrada: " + ingressosMeiaEntrada + ", VIP: " + ingressosVIP + "\n" +
-                "Receita Líquida: R$ " + receitaLiquida + "\n" +
+                "Receita Liquida: R$ " + receitaLiquida + "\n" +
                 "Status Financeiro: " + statusFinanceiro;
     }
     
