@@ -11,8 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AnaliseDeValoresLimitesTests {
     private ProcessadorContas processadorContas;
@@ -37,12 +36,8 @@ public class AnaliseDeValoresLimitesTests {
         Pagamento pagamento = new Pagamento(valor, this.data, TipoPagamento.BOLETO);
         Date dataFatura = this.data;
 
-        Boolean output = this.processadorContas.checaPagamentoValido(pagamento, dataFatura);
+        boolean output = this.processadorContas.checaPagamentoValido(pagamento, dataFatura);
 
-        if (esperado) {
-            assertTrue(output);
-        } else {
-            assertFalse(output);
-        }
+        assertEquals(output, esperado);
     }
 }
