@@ -1,4 +1,4 @@
-Exercício 3 da Disciplina de Validação e Verificação de Software - 2024.2
+Exercícios da Disciplina de Validação e Verificação de Software - 2024.2
 
 Grupo:\
 Rafael de Sousa Cavalcante\
